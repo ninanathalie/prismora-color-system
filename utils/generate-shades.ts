@@ -22,7 +22,7 @@ export const generateShades = (baseColor: string): Record<string, string> => {
 
   // Generate lighter shades from white to base color
   for (let i = -100; i <= -10; i += 10) {
-    const lightness = hsl.lightness + (1 - hsl.lightness) * (-i / 100);
+    const lightness = hsl.lightness + (1 - hsl.lightness) * (-i / 110);
     const adjustedHsl = { ...hsl, lightness: Math.min(lightness, 1) };
     const shade = hslToColorString(adjustedHsl);
     shades[`${i}%`] = shade;
@@ -33,7 +33,7 @@ export const generateShades = (baseColor: string): Record<string, string> => {
 
   // Generate darker shades from base color to black
   for (let i = 10; i <= 100; i += 10) {
-    const lightness = hsl.lightness * (1 - i / 100);
+    const lightness = hsl.lightness * (1 - i / 110);
     const adjustedHsl = { ...hsl, lightness: Math.max(lightness, 0) };
     const shade = hslToColorString(adjustedHsl);
     shades[`${i}%`] = shade;
