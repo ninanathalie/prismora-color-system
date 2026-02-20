@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+
 import { PiCopySimpleBold } from "react-icons/pi";
 import { VscCircleFilled } from "react-icons/vsc";
 import { Toaster } from "react-hot-toast";
@@ -27,13 +28,29 @@ export default function ColorGenerator() {
 
   return (
     <div className="h-screen flex flex-col">
-      <div className="flex flex-col mb-4 p-4 sm:p-6">
-        <h1>Color System Generator</h1>
-        <form className="flex" onSubmit={(e) => e.preventDefault()}>
-          <div className="border rounded-full h-8 w-8 mr-4" style={{ backgroundColor: expandHex(baseColor) || "#ffffff" }}></div>
-          <input className="bg-transparent border-b border-slate-400 focus-within:shadow-none focus-visible:outline-none" type="text" value={baseColor} onChange={handleInputChange} onKeyPress={handleKeyPress} placeholder="Enter a base color (e.g., #d5f7ff)" />
+      <header className="flex items-center justify-between px-6 py-4 border-b border-slate-200">
+        <div className="flex items-center gap-4">
+          <img src="/images/nn-logo.svg" alt="NN Logo" width={32} height={32} />
+          <div>
+            <h1 className="text-lg font-semibold tracking-tight">Color System Generator</h1>
+            <p className="text-xs text-slate-400">Enter a hex color and press Enter</p>
+          </div>
+        </div>
+        <form className="flex items-center gap-3" onSubmit={(e) => e.preventDefault()}>
+          <div
+            className="rounded-full h-9 w-9 shrink-0 border border-slate-200 shadow-sm transition-colors"
+            style={{ backgroundColor: expandHex(baseColor) || "#ffffff" }}
+          />
+          <input
+            className="bg-slate-50 rounded-lg px-3 py-2 text-sm border border-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-300 w-52"
+            type="text"
+            value={baseColor}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyPress}
+            placeholder="#d5f7ff"
+          />
         </form>
-      </div>
+      </header>
 
       <ul className="flex-1 grid grid-cols-7 overflow-auto">
         {Object.entries(colorShades).map(([level, color]) => {
